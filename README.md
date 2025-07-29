@@ -1,3 +1,3 @@
-# readsheet-automatic-writing-program
+# readsheet-automatic-writing-program (미완성)
 
 정산표 금액을 수기로 입력하고 → xbrl 재무제표를 첨부 → 총괄표 양식 첨부→ 재무제표 상 금액과 기입한 금액을 대조하여 일치할 경우 총괄표 양식에 맞춰서 산출물 제공하는 프로그램을 만들고자 하였습니다.

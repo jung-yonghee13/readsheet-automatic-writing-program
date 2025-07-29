@@ -46,7 +46,7 @@ if st.button("총괄표 작성"):
     else:
         try:
             # XBRL 파일 처리
-            df = pd.read_excel(xbrl_file, sheet_name="D210005", header=None) #시트를 지정해버렸음 좀 더 나은 방법 강구
+            df = pd.read_excel(xbrl_file, sheet_name="D210005", header=None)
             df.columns = df.iloc[4]
             df = df.drop(index=list(range(0, 5))).reset_index(drop=True)
             df.rename(columns={df.columns[0]: "계정과목"}, inplace=True)
@@ -71,8 +71,10 @@ if st.button("총괄표 작성"):
                 if abs(input_beg_acq - xbrl_beg_acq) > 1 or abs(input_end_acq - xbrl_end_acq) > 1:
                     st.error("❌ 정산표와 XBRL 재무제표의 취득가액이 일치하지 않습니다.")
                 else:
-                    # 총괄표 템플릿 불러오기
+                    # 총괄표 템플릿 불러오기 및 Unnamed 열 제거
                     template_df = pd.read_excel(template_file)
+                    template_df.columns = template_df.columns.map(lambda x: str(x) if pd.notnull(x) else "")
+                    template_df = template_df.loc[:, ~template_df.columns.str.contains("^Unnamed|^nan$", case=False)]
                     result_df = template_df.copy()
 
                     # 자동 열 이름 및 자산명 열 설정
@@ -100,6 +102,7 @@ if st.button("총괄표 작성"):
                     )
         except Exception as e:
             st.error(f"❌ 처리 중 오류 발생: {e}")
+
 
 
 

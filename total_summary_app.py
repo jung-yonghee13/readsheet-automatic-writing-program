@@ -46,7 +46,7 @@ if st.button("총괄표 작성"):
     else:
         try:
             # XBRL 파일 처리
-            df = pd.read_excel(xbrl_file, sheet_name="D210005", header=None)
+            df = pd.read_excel(xbrl_file, sheet_name="D210005", header=None) #시트를 지정해버렸음 좀 더 나은 방법 강구
             df.columns = df.iloc[4]
             df = df.drop(index=list(range(0, 5))).reset_index(drop=True)
             df.rename(columns={df.columns[0]: "계정과목"}, inplace=True)
